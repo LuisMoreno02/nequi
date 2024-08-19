@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clave</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2e002e;
+            font-family: Arial, sans-serif;
+            color: white;
+            position: relative; /* Añadido para posicionar elementos relativos */
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .pin-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pin-input {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            width: 200px; /* Ajustar tamaño según sea necesario */
+        }
+
+        .pin-input input {
+            width: 40px;
+            height: 40px;
+            font-size: 50px; /* Ajustar tamaño de los asteriscos aquí */
+            text-align: center;
+            line-height: 40px; /* Alinear verticalmente */
+            border: none;
+            border-radius: 5px;
+            background-color: white;
+            color: #e6005c; /* Color morado para los asteriscos */
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .keypad button {
+            background: none;
+            color: white;
+            border: none;
+            padding: 20px;
+            font-size: 24px; /* Ajustar tamaño de los números aquí */
+            cursor: pointer;
+        }
+
+        .keypad button:focus {
+            outline: none;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">←</button>
+    <div class="container">
+        <div class="pin-container" id="pin-container">
+            <h2>Escribe tu clave</h2>
+            <div class="pin-input">
+                <input type="text" id="pin1" maxlength="1" readonly placeholder="">
+                <input type="text" id="pin2" maxlength="1" readonly placeholder="">
+                <input type="text" id="pin3" maxlength="1" readonly placeholder="">
+                <input type="text" id="pin4" maxlength="1" readonly placeholder="">
+            </div>
+            <div class="texto">
+                <p>No dudamos que seas tú... <br> Pero es mejor confirmar ;)</p>
+            </div>
+            <div class="keypad">
+                <button onclick="enterPin(1)">1</button>
+                <button onclick="enterPin(2)">2</button>
+                <button onclick="enterPin(3)">3</button>
+                <button onclick="enterPin(4)">4</button>
+                <button onclick="enterPin(5)">5</button>
+                <button onclick="enterPin(6)">6</button>
+                <button onclick="enterPin(7)">7</button>
+                <button onclick="enterPin(8)">8</button>
+                <button onclick="enterPin(9)">9</button>
+                <button onclick="clearPin()"></button>
+                <button onclick="enterPin(0)">0</button>
+                <button onclick="deletePin()">←</button>
+            </div>
+            <div class="message">¿Se te olvidó?</div>
+        </div>
+    </div>
+
+    <script>
+        let pin = "";
+        const pinInputs = document.querySelectorAll('.pin-input input');
+
+        function enterPin(num) {
+            if (pin.length < 4) {
+                pin += num;
+                pinInputs[pin.length - 1].value = "*"; // Asterisco morado
+                pinInputs[pin.length - 1].style.color = '#e6005c'; // Color morado
+            }
+
+            if (pin.length === 4) {
+                // Aquí redirige a la página envia_plata.html
+                window.location.href = "inicio.html";
+            }
+        }
+
+        function clearPin() {
+            pin = "";
+            pinInputs.forEach(input => {
+                input.value = '';
+            });
+        }
+
+        function deletePin() {
+            if (pin.length > 0) {
+                pinInputs[pin.length - 1].value = '';
+                pin = pin.slice(0, -1);
+            }
+        }
+
+        function goBack() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
